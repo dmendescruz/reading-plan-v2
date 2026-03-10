@@ -12,11 +12,9 @@ export const authConfig: NextAuthConfig = {
     signIn: "/login",
   },
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user
-      const isAuthPage = nextUrl.pathname.startsWith("/login")
-      if (isAuthPage) return isLoggedIn ? Response.redirect(new URL("/", nextUrl)) : true
-      return isLoggedIn
+    authorized() {
+      // Todas as rotas são públicas — login é opcional
+      return true
     },
   },
 }
